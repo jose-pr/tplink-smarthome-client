@@ -1,0 +1,6 @@
+/pnpm-lock.yaml
+/tsconfig.test.json
+/test
+/node_modules
+/.vscode
+/package.json

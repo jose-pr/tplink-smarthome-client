@@ -1,0 +1,35 @@
+{
+  "name": "tplink-smarthome-client",
+  "version": "0.9.3",
+  "description": "Basic client for TP-Link Smarthome Protocol.",
+  "main": "lib/smarthome-client.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "files": [
+    "/lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jose-pr/tplink-smarthome-client.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jose-pr/tplink-smarthome-client/issues"
+  },
+  "homepage": "https://github.com/jose-pr/tplink-smarthome-client",
+  "devDependencies": {
+    "@types/node": "^14.0.5",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "smarthome",
+    "tp-link"
+  ],
+  "author": "Jose A.",
+  "license": "ISC"
+}
