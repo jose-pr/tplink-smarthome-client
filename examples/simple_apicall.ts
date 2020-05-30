@@ -4,7 +4,7 @@ import { SmartHomeApiResponse, SmartHomeApiMethodResponse, GenericSmartHomeApi, 
 
 let client = new SmartHomeClient<ExampleApi>({
     host: "smarthome.lan",
-    proto: 'udp'
+    proto: 'tcp'
 })
 
 type VerifiedSmartHomeResponse<R> = {

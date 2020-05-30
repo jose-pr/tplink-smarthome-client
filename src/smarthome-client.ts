@@ -36,12 +36,12 @@ export class SmartHomeClient<Api extends GenericSmartHomeApi> {
         EncryptInPlace(msg.slice(4));
         return this._proto == "tcp" ? msg : msg.slice(4);
     }
-    _unpackMsg<R>(msg: Buffer){
+    _unpackMsg<R>(msg: Buffer) {
         const content = this._proto == 'tcp' ? msg.slice(4) : msg;
         if (this._proto == 'tcp' && msg.slice(0, 4).readUInt32BE() !== content.length)
             throw new Error("Received a bad response");
         const stringResp = DencryptInPlace(content).toString('utf-8');
-        return JSON.parse(stringResp) as SmartHomeApiResponse<R,Api>
+        return JSON.parse(stringResp) as SmartHomeApiResponse<R, Api>
     }
     async disconnect() {
         if (this._socket) await this._socket.close();
@@ -54,21 +54,24 @@ export class SmartHomeClient<Api extends GenericSmartHomeApi> {
             await this._socket.open();
         }
     }
+    _fill(msg: Buffer, offset: number, data: Buffer): [Buffer, boolean] {
+        if (this._proto == 'udp') {
+            return [msg, true]
+        }
+        if (offset == 0) {
+            data = Buffer.allocUnsafe(msg.slice(0, 4).readUInt32BE() + 4);
+        }
+        data.fill(msg, offset);
+        return [data, offset + msg.length >= data.length ? true : false];
+    }
     async request<R extends SmartHomeApiRequest<Api>>(request: R): Promise<SmartHomeApiResponse<R, Api>> {
         if (this._busy) throw new Error("Can only do one request at a time")
         if (this._socket === undefined) throw new Error("Client is disconnected")
         this._busy = true;
-        const response: Buffer =
-            await this._socket.read(this._prepareMsg(request), this._proto == "tcp" ? (msg: Buffer, offset: number, data: Buffer) => {
-                if (offset == 0) {
-                    data = Buffer.allocUnsafe(msg.slice(0, 4).readUInt32BE() + 4);
-                }
-                data.fill(msg, offset);
-                return [data, offset + msg.length >= data.length ? true : false];
-            } : undefined).catch(async (e) => {
-                await this.disconnect();
-                throw e;
-            });
+        const response: Buffer = await this._socket.read(this._prepareMsg(request), this._fill.bind(this)).catch(async (e) => {
+            await this.disconnect();
+            throw e;
+        });
         this._busy = false;
         return this._unpackMsg<R>(response);
     }
