@@ -1,6 +1,6 @@
 import { SmartHomeClient } from "../src/smarthome-client";
 import { ExampleApi, GetTimeZone, GetTime, GetRealtime, GetSysInfo, SysInfo } from "./smarthome-api-declarations";
-import { SmartHomeApiResponse, SmartHomeApiMethodResponse, GenericSmartHomeApi, ValidSmartHomeMethodResult } from "../src/smarthome-api";
+import { SmartHomeApiResponse, SmartHomeApiMethodResult, GenericSmartHomeApi, ValidSmartHomeMethodResult } from "../src/smarthome-api";
 
 let client = new SmartHomeClient<ExampleApi>({
     host: "smarthome.lan",
@@ -15,7 +15,7 @@ type VerifiedSmartHomeResponse<R> = {
     }
 }
 
-function isValidResult<A>(result: SmartHomeApiMethodResponse<A>): result is ValidSmartHomeMethodResult<A> {
+function isValidResult<A>(result: SmartHomeApiMethodResult<A>): result is ValidSmartHomeMethodResult<A> {
     return result.err_code === 0;
 }
 
@@ -30,7 +30,7 @@ function verifyResponse<A extends SmartHomeApiResponse<GenericSmartHomeApi, Gene
     return true;
 }
 function keys<A extends {}>(obj: A) {
-    return Object.keys(obj) as any as (Exclude<keyof A, symbol | number>)[]
+    return Object.keys(obj) as (Exclude<keyof A, symbol | number>)[]
 }
 
 async function using<R, U extends {

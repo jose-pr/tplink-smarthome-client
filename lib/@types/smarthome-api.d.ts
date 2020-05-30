@@ -19,19 +19,19 @@ export declare type ValidSmartHomeMethodResult<R> = {
 export declare type ErrorSmartHomeMethodResult<R> = {
     err_code: 1 | 2 | 3 | 4 | 5;
 } & Partial<R>;
-export declare type SmartHomeApiMethodResponse<R> = ValidSmartHomeMethodResult<R> | ErrorSmartHomeMethodResult<R>;
+export declare type SmartHomeApiMethodResult<R> = ValidSmartHomeMethodResult<R> | ErrorSmartHomeMethodResult<R>;
 export declare type SmartHomeApiResponse<Req extends {}, Api extends GenericSmartHomeApi> = {
     [ns in keyof Req]: ns extends keyof Api ? {
-        [n in keyof Req[ns]]: n extends keyof Api[ns] ? Req[ns][n] extends Parameters<Api[ns][n]>[0] ? SmartHomeApiMethodResponse<ReturnType<Api[ns][n]>> : SmartHomeApiMethodResponse<never> : SmartHomeApiMethodResponse<never>;
+        [n in keyof Req[ns]]: n extends keyof Api[ns] ? Req[ns][n] extends Parameters<Api[ns][n]>[0] ? SmartHomeApiMethodResult<ReturnType<Api[ns][n]>> : SmartHomeApiMethodResult<never> : SmartHomeApiMethodResult<never>;
     } : {
-        [n in keyof Req[ns]]: SmartHomeApiMethodResponse<never>;
+        [n in keyof Req[ns]]: SmartHomeApiMethodResult<never>;
     };
 };
 export declare type SmartHomeApiResponse1<Req extends {}, Api extends GenericSmartHomeApi> = {
     [ns in keyof Req]: ns extends keyof Api ? {
-        [n in keyof Req[ns]]: n extends keyof Api[ns] ? Req[ns][n] extends Parameters<Api[ns][n]>[0] ? SmartHomeApiMethodResponse<ReturnType<Api[ns][n]>> : SmartHomeApiMethodResponse<never> : SmartHomeApiMethodResponse<never>;
+        [n in keyof Req[ns]]: n extends keyof Api[ns] ? Req[ns][n] extends Parameters<Api[ns][n]>[0] ? SmartHomeApiMethodResult<ReturnType<Api[ns][n]>> : SmartHomeApiMethodResult<never> : SmartHomeApiMethodResult<never>;
     } : {
-        [n in keyof Req[ns]]: SmartHomeApiMethodResponse<never>;
+        [n in keyof Req[ns]]: SmartHomeApiMethodResult<never>;
     };
 };
 export declare type SmartHomeApiRequest<Api extends {}> = {

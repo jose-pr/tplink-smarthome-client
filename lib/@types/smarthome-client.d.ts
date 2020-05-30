@@ -15,8 +15,9 @@ export declare class SmartHomeClient<Api extends GenericSmartHomeApi> {
     constructor({ host, port, proto }: SmartHomeClientOptions);
     _getSocket(): TcpSocket | UdpSocket;
     _prepareMsg(req: {}): Buffer;
-    _unpackMsg(msg: Buffer): {};
+    _unpackMsg<R>(msg: Buffer): SmartHomeApiResponse<R, Api>;
     disconnect(): Promise<void>;
     connect(): Promise<void>;
+    _fill(msg: Buffer, offset: number, data: Buffer): [Buffer, boolean];
     request<R extends SmartHomeApiRequest<Api>>(request: R): Promise<SmartHomeApiResponse<R, Api>>;
 }
