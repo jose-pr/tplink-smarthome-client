@@ -25,7 +25,7 @@ export function DencryptInPlace(ciphertext:Buffer) {
     }
     return ciphertext;
 }
-function Decrypt(ciphertext:Buffer) {
+export function Decrypt(ciphertext:Buffer) {
     const plaintext = Buffer.allocUnsafe(ciphertext.length);
     let key = IV;
     for (let i = 0; i < ciphertext.length; i++) {
