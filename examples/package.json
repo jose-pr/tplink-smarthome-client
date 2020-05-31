@@ -1,0 +1,5 @@
+{
+    "dependencies": {
+        "tplink-smarthome-client": "link:.."
+    }
+}

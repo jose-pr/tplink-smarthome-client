@@ -1,4 +1,4 @@
-import { SmartHomeApiMethod, SmartHomeApi } from "../src/smarthome-api"
+import { SmartHomeApiMethod, SmartHomeApi } from "tplink-smarthome-client"
 
 interface DeviceTime {
     hour: number

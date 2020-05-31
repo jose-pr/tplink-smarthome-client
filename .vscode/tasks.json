@@ -1,0 +1,32 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+			{
+				"label": "build_example",
+				"command": "tsc --build ./tsconfig.json",
+				"type": "shell",
+				"group": "build",
+				"options":{
+					"cwd": "${workspaceFolder}/examples"
+				},
+				"presentation": {
+					"reveal": "silent"
+				},
+				"problemMatcher": "$msCompile",
+				"dependsOn":["build"]
+			},
+			{
+				"label": "build",
+				"command": "tsc --build ./tsconfig.json",
+				"type": "shell",
+				"group": "build",
+				"options":{
+					"cwd": "${workspaceFolder}"
+				},
+				"presentation": {
+					"reveal": "silent"
+				},
+				"problemMatcher": "$msCompile"
+			}
+	]
+}
