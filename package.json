@@ -1,6 +1,6 @@
 {
   "name": "tplink-smarthome-client",
-  "version": "0.9.6",
+  "version": "0.9.7",
   "description": "Basic client for TP-Link Smarthome Protocol.",
   "main": "lib/index.js",
   "types": "lib/@types/index.d.ts",
